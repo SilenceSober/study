@@ -1,0 +1,11 @@
+package shiro.service;
+
+import java.util.List;
+
+import shiro.entity.*;
+
+public interface RoleService {
+	
+	public List<SysRole> findByUserid(Integer userId);
+		
+}

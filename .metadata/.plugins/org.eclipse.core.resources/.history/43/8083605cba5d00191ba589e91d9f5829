@@ -1,0 +1,8 @@
+package shiro.service;
+
+import shiro.entity.*;
+import antlr.collections.List;
+
+public interface RoleService {
+	public List<SysRole> findByUserid();
+}

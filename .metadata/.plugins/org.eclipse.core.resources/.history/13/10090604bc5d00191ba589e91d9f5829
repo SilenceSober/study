@@ -1,0 +1,5 @@
+package shiro.entity;
+
+public class SysMenu {
+
+}

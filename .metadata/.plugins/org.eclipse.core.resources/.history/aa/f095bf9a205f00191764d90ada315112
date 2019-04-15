@@ -1,0 +1,29 @@
+package shiro.entity;
+
+import java.util.List;
+
+public class UserInfo {
+	
+	private Integer id;
+	
+	private String loginName;
+	
+	private String password;
+	
+	private String role_id;
+	
+	private String no;
+	
+	private String name;
+
+	private List<SysRole> roleList;
+
+	private Byte state;
+
+	private String credentialsSalt;
+
+	private String userName;
+
+	
+
+}

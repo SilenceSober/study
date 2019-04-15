@@ -1,0 +1,52 @@
+package shiro.entity;
+
+import java.util.List;
+
+import lombok.Data;
+
+
+public @Data class UserInfo {
+
+	private Integer id;
+
+	private String loginName;
+
+	private String password;
+
+	private String roleId;
+
+	private String no;
+
+	private String name;
+
+	private String email;
+
+	private String phone;
+
+	private String mobile;
+
+	private String photo;
+
+	private String loginIp;
+
+	private String loginFlag;
+
+	private String loginDate;
+
+	private String creatBy;
+
+	private String creatDate;
+
+	private String remarks;
+
+	private String delFlag;
+
+	private List<SysRole> roleList;
+
+	private Byte state;
+
+	private String credentialsSalt;
+
+	private String userName;
+
+}

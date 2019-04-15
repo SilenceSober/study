@@ -1,0 +1,18 @@
+1554726313030	Rename package 'com.example.shiro'
+1554794063601	Move file
+1554799764144	Move ' shiro_jdbc.ini' to 'templates'
+1554799771642	Move file
+1554799810806	Rename resource ' shiro_jdbc.ini'
+1554804662770	Rename resource 'shiro_jdbc.ini'
+1554901309704	Delete element
+1554901398979	Delete element
+1554901401286	Delete element
+1554901512567	Delete element
+1554901584417	Delete element
+1555032436356	Move compilation unit
+1555032506667	Rename resource 'application.properties'
+1555059892837	Rename resource 'application.yml'
+1555060491648	Rename resource 'application.propertices'
+1555132933974	Delete element
+1555146309439	Rename type 'MyShiroRealm'
+1555146339128	Rename type 'ShiroRealm'

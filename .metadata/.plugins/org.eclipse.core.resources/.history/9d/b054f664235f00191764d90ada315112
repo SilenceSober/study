@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="shiro.dao.UserInfoDao">
+	<resultMap type="userMap" id="shiro.entity.UserInfo">
+		<result column="id" property="id" jdbcType="INTEGER" />
+        <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="no" property="no" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+        <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+		<result column="login_flag" property="loginFlag" jdbcType="VARCHAR" />
+        <result column="login_date" property="loginDate" jdbcType="BIGINT" />
+        <result column="creat_by" property="creatBy" jdbcType="VARCHAR" />
+        <result column="creat_date" property="creatDate" jdbcType="BIGINT" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
+	</resultMap>
+
+	<select id="findByUsername" parameterType="java.lang.String" resultMap="userMap">
+		select * from sys_user where login_name =#{}
+	
+	
+	
+	</select>
+	
+</mapper>

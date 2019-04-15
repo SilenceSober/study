@@ -1,0 +1,9 @@
+package shiro.dao;
+
+import org.springframework.stereotype.Component;
+
+@Mapper()
+@Component
+public interface  UserInfoDao {
+	
+}

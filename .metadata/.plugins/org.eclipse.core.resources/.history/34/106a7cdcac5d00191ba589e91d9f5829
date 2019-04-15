@@ -1,0 +1,8 @@
+package shiro.dao;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+@Mapper
+public abstract class  UserInfoDao  extends SqlSessionDaoSupport{
+	
+}

@@ -1,0 +1,6 @@
+package shiro.dao;
+
+@Component
+public interface  UserInfoDao {
+	
+}

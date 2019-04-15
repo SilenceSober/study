@@ -1,0 +1,104 @@
+package shiro.config;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
+import shiro.entity.SysMenu;
+import shiro.entity.SysPermission;
+import shiro.entity.SysRole;
+import shiro.entity.UserInfo;
+import shiro.service.MenuService;
+import shiro.service.RoleService;
+import shiro.service.UserInfoService;
+
+@Slf4j
+@Component
+public class MyShiroRealm extends AuthorizingRealm {
+
+	@Autowired
+	private UserInfoService userInfoService;
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private MenuService menuService;
+
+	/**
+	 * 授权
+	 */
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		Object principal = principals.getPrimaryPrincipal();
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		if (principal instanceof UserInfo) {
+			UserInfo userLogin = (UserInfo) principal;
+			if (userLogin != null) {
+				List<SysRole> roleList = roleService.findByUserid(userLogin.getId());
+				if (CollectionUtils.isNotEmpty(roleList)) {
+					for (SysRole role : roleList) {
+						authorizationInfo.addRole(role.getEnName());
+						List<SysMenu> menuList = menuService.getAllMenuByRoleId(role.getId());
+						if (CollectionUtils.isNotEmpty(menuList)) {
+							for (SysMenu menu : menuList) {
+								if (StringUtils.isNotBlank(menu.getPermission())) {
+									authorizationInfo.addStringPermission(menu.getPermission());
+								}
+							}
+						}
+					}
+
+				}
+				Logger.info("---------------- 获取到以下权限 ----------------");
+				Logger.info(authorizationInfo.getStringPermissions().toString());
+				Logger.info("---------------- Shiro 权限获取成功 ----------------------");
+				return authorizationInfo;
+			}
+		}
+	}
+
+	/**
+	 * 认证
+	 */
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+//      System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
+		// 获取用户的输入的账号.
+		String username = (String) token.getPrincipal();
+//      System.out.println(token.getCredentials());
+		// 通过username从数据库中查找 User对象，如果找到，没找到.
+		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
+		UserInfo userInfo = userInfoService.findByUsername(username);
+//      System.out.println("----->>userInfo="+userInfo);
+		if (userInfo == null) {
+			return null;
+		}
+		if (userInfo.getState() == 1) { // 账户冻结
+			throw new LockedAccountException();
+		}
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userInfo, // 用户名
+				userInfo.getPassword(), // 密码
+				ByteSource.Util.bytes(userInfo.getCredentialsSalt()), // salt=username+salt
+				getName() // realm name
+		);
+		return authenticationInfo;
+	}
+}

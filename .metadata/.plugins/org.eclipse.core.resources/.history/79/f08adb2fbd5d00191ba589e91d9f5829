@@ -1,0 +1,11 @@
+package shiro.service;
+
+import shiro.config.User;
+import shiro.entity.UserInfo;
+
+public interface UserInfoService {
+	
+	public UserInfo findByUsername(String username);
+
+	public User getUserByName(String name);
+}

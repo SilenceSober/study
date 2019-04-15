@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="shiro.dao.UserInfoDao">
+	<resultMap type="userMap" id="shiro.entity.UserInfo">
+		<result column="id" property="id" jdbcType="Integer" />
+        <result column="login_name" property="loginName" jdbcType="" />
+        <result column="password" property="password" jdbcType="" />
+        <result column="role_id" property="roleId" jdbcType="" />
+        <result column="no" property="" jdbcType="" />
+        <result column="name" property="" jdbcType="" />
+        <result column="email" property="" jdbcType="" />
+        <result column="phone" property="" jdbcType="" />
+        <result column="mobile" property="" jdbcType="" />
+        <result column="photo" property="" jdbcType="" />
+        <result column="login_ip" property="" jdbcType="" />
+		<result column="login_flag" property="" jdbcType="" />
+        <result column="login_date" property="" jdbcType="" />
+        <result column="creat_by" property="" jdbcType="" />
+        <result column="creat_date" property="" jdbcType="" />
+        <result column="remarks" property="" jdbcType="" />
+        <result column="del_flag" property="" jdbcType="" />
+	</resultMap>
+
+
+
+
+
+
+
+
+
+
+</mapper>

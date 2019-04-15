@@ -1,0 +1,5 @@
+package shiro.service;
+
+public interface RoleService {
+	public List<SysRole> findByUserid();
+}
